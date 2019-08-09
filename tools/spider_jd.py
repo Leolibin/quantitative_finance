@@ -7,7 +7,7 @@ import requests
 from lxml import html
 
 
-def spider(sn):
+def spider(sn, booklist=[]):
     """爬取京东的书籍"""
     url = 'https://search.jd.com/Search?keyword={sn}'.format(sn=sn)
     headers = {
@@ -21,26 +21,31 @@ def spider(sn):
     selector = html.fromstring(html_doc)
     # 先抓大（找到列表集合）
     ul_list = selector.xpath('//div[@id="J_goodsList"]/ul/li')
-    print(len(ul_list))
+    # print(len(ul_list))
     # 再抓小（解析对应的内容，标题，价格，链接）
     for li in ul_list:
         # 标题
         title = li.xpath('div/div[@class="p-name"]/a/@title')
-        print(title)
+        # print(title)
         # 购买链接
         link = li.xpath('div/div[@class="p-name"]/a/@href')
-        print(link[0])
+        # print(link[0])
         # 价格
         price = li.xpath('div/div[@class="p-price"]/strong/i/text()')
-        print(price[0])
+        # print(price[0])
         # 店铺
         store = li.xpath('div/div[@class="p-shopnum"]/a[@class="curr-shop hd-shopname"]/text()')
-        print(store[0])
-        # 优惠活动
-        discount = li.xpath('div/div/i[@class="goods-icons4 J-picon-tips"]/text()')
-        print(discount[0])
-        print("------------------------------------------------------------------------")
-
+        # print(store[0])
+        # # 优惠活动
+        # discount = li.xpath('div/div/i[@class="goods-icons4 J-picon-tips"]/text()')
+        # print(discount[0])
+        booklist.append({
+            'title': title[0],
+            'price': price[0],
+            'link': link[0],
+            'store': store[0]
+        })
+        # print("------------------------------------------------------------------------")
 
 
 if __name__ == '__main__':
