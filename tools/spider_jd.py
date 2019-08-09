@@ -32,10 +32,13 @@ def spider(sn):
         print(link[0])
         # 价格
         price = li.xpath('div/div[@class="p-price"]/strong/i/text()')
-        print(price)
+        print(price[0])
         # 店铺
-        store = li.xpath('div//a[@class="curr-shop"]/@title')
-        print(store)
+        store = li.xpath('div/div[@class="p-shopnum"]/a[@class="curr-shop hd-shopname"]/text()')
+        print(store[0])
+        # 优惠活动
+        discount = li.xpath('div/div/i[@class="goods-icons4 J-picon-tips"]/text()')
+        print(discount[0])
         print("------------------------------------------------------------------------")
 
 
