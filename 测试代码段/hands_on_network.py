@@ -38,6 +38,13 @@ def identity_function(x):
     return x
 
 
+def softmax(a):
+    exp_a = np.exp(a)
+    sum_exp_a = np.sum(exp_a)
+    y = exp_a / sum_exp_a
+    return y
+
+
 network = init_network()
 x = np.array([0.1, 0.3])
 y = forward(network, x)
