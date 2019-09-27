@@ -12,3 +12,5 @@ a = np.array([10011, 10010, 10009])
 c = np.max(a)
 a_exp_c = np.exp(a - c) / np.sum(np.exp(a - c))
 print(a_exp_c)
+# softmax输出的数组的和为1
+print(np.sum(a_exp_c))
